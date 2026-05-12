@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="TaskFlow.API/TaskFlow.API.csproj" />
+  <Project Path="TaskFlow.DAL/TaskFlow.DAL.csproj" Id="94727439-a337-45ee-9d6e-87cf8b01f312" />
 </Solution>

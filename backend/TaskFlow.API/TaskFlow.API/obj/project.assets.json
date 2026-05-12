@@ -2545,11 +2545,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\abith\\Documents\\Projects\\TaskFlow.API\\TaskFlow.API\\TaskFlow.API.csproj",
+      "projectUniqueName": "C:\\Users\\abith\\Documents\\Projects\\TaskFlow\\backend\\TaskFlow.API\\TaskFlow.API\\TaskFlow.API.csproj",
       "projectName": "TaskFlow.API",
-      "projectPath": "C:\\Users\\abith\\Documents\\Projects\\TaskFlow.API\\TaskFlow.API\\TaskFlow.API.csproj",
+      "projectPath": "C:\\Users\\abith\\Documents\\Projects\\TaskFlow\\backend\\TaskFlow.API\\TaskFlow.API\\TaskFlow.API.csproj",
       "packagesPath": "C:\\Users\\abith\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\abith\\Documents\\Projects\\TaskFlow.API\\TaskFlow.API\\obj\\",
+      "outputPath": "C:\\Users\\abith\\Documents\\Projects\\TaskFlow\\backend\\TaskFlow.API\\TaskFlow.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2568,6 +2568,7 @@
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {}
         }
@@ -2586,6 +2587,7 @@
     },
     "frameworks": {
       "net8.0": {
+        "framework": "net8.0",
         "targetAlias": "net8.0",
         "dependencies": {
           "BCrypt.Net-Next": {
