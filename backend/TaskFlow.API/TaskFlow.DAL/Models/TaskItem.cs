@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TaskFlow.API.Models
+namespace TaskFlow.DAL.Models
 {
     public class TaskItem
     {

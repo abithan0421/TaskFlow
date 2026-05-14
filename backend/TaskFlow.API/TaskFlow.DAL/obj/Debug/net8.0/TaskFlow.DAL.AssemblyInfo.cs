@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TaskFlow.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ab92db85e41dd32ad0ea026eb5fadeed4544abf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32dbef1931923f2071a2e688f4e14b82fd053058")]
 [assembly: System.Reflection.AssemblyProductAttribute("TaskFlow.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TaskFlow.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
