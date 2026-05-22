@@ -10,6 +10,7 @@ using TaskFlow.BLL.Services;
 using TaskFlow.DAL.Data;
 using TaskFlow.DAL.Interfaces;
 using TaskFlow.DAL.Repositories;
+using TaskFlow.BLL.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     ));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<JwtHelper>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 

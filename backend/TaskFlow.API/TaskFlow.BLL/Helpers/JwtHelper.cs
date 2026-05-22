@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
 using System.Text;
 using TaskFlow.DAL.Models;
@@ -8,7 +9,12 @@ namespace TaskFlow.BLL.Helpers
 {
     public class JwtHelper
     {
-        public static string GenerateToken(User user)
+        private readonly IConfiguration _configuration;
+        public JwtHelper(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        public string GenerateToken(User user)
         {
             var claims = new[]
             {
@@ -18,7 +24,7 @@ namespace TaskFlow.BLL.Helpers
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("THIS_IS_MY_SUPER_SECRET_KEY_12345")
+                Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])
             );
 
             var creds = new SigningCredentials(
@@ -26,11 +32,19 @@ namespace TaskFlow.BLL.Helpers
                 SecurityAlgorithms.HmacSha256
             );
 
+            //var token = new JwtSecurityToken(
+            //    claims: claims,
+            //    expires: DateTime.Now.AddDays(1),
+            //    signingCredentials: creds
+            //);
+
             var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds
-            );
+                                issuer: _configuration["Jwt:Issuer"],
+                                audience: _configuration["Jwt:Audience"],
+                                claims: claims,
+                                expires: DateTime.Now.AddHours(2),
+                                signingCredentials: creds
+                                );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
