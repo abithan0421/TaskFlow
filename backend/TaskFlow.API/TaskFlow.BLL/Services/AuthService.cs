@@ -10,10 +10,12 @@ namespace TaskFlow.BLL.Services
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
+        private readonly JwtHelper _jwtHelper;
 
-        public AuthService(IUserRepository userRepository)
+        public AuthService(IUserRepository userRepository, JwtHelper jwtHelper)
         {
             _userRepository = userRepository;
+            _jwtHelper = jwtHelper;
         }
 
         public async Task<string> RegistrationAsync(RegistrationRequestDto request)
@@ -61,7 +63,7 @@ namespace TaskFlow.BLL.Services
                 return "Invalid email or password";
             }
 
-            return JwtHelper.GenerateToken(user);
+            return _jwtHelper.GenerateToken(user);
         }
     }
 }

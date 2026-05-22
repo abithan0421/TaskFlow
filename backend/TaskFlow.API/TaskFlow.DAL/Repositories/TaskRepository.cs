@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TaskFlow.DAL.Interfaces;
+using TaskFlow.DAL.Models;
+using TaskFlow.DAL.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace TaskFlow.DAL.Repositories
+{
+    public class TaskRepository : ITaskRepository
+    {
+        private readonly ApplicationDbContext _dbcontext;
+        public TaskRepository(ApplicationDbContext dbcontext)
+        {
+            _dbcontext = dbcontext;
+        }
+
+         async Task ITaskRepository.AddTaskAsync(TaskItem task)
+        {
+            await _dbcontext.TaskItems.AddAsync(task);
+        }
+
+        async Task<List<TaskItem>> ITaskRepository.GetUserByIdTaskItemAsync(int id)
+        {
+            return await _dbcontext.TaskItems.Where(x => x.UserId == id).ToListAsync();
+        }
+
+        async Task ITaskRepository.SaveChangesAsync()
+        {
+            await _dbcontext.SaveChangesAsync();
+        }
+    }
+}
