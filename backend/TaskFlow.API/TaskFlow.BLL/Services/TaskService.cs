@@ -41,5 +41,56 @@ namespace TaskFlow.BLL.Services
                 IsCompleted = t.IsCompleted
             }).ToList();
         }
+
+        public async Task MarkCompleteAsync(int taskId, int userId)
+        {
+            var task =
+                await _taskRepository.GetTaskByIdAsync(taskId);
+
+            try
+            {
+
+                if (task == null)
+                {
+                    throw new Exception("Task not found");
+                }
+
+                if (task.UserId != userId)
+                {
+                    throw new Exception("Unauthorized");
+                }
+
+                task.IsCompleted = true;
+
+                await _taskRepository.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Some error occurred: ", ex.Message);
+            }
+        }
+
+        public async Task RemoveTaskAsync(int taskId, int userId)
+        {
+            var task = await _taskRepository.GetTaskByIdAsync(taskId);
+            try
+            {
+                if (task == null)
+                {
+                    throw new Exception("Task not found");
+                }
+                if (task.UserId != userId)
+                {
+                    throw new Exception("Unauthorized");
+                }
+                await _taskRepository.DeleteTaskAsync(task);
+                await _taskRepository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Some error occurred: ", ex.Message);
+            }
+        }
     }
 }

@@ -78,6 +78,36 @@ function Dashboard() {
         navigate("/");
     };
 
+    const markComplete = async (id) => {
+
+    try {
+
+        await api.put(`/task/${id}/complete`);
+
+        fetchTasks();
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Failed to update task");
+    }
+    };
+
+    const deleteTask = async (id) => {
+        try{
+            await api.delete(`/task/${id}/remove`);
+            fetchTasks();
+            alert("Task deleted");
+
+        } catch (error) {
+            
+            console.log(error);
+
+            alert("Failed to delete task");
+    }
+    };
+
     return (
 
         <div style={styles.container}>
@@ -149,6 +179,23 @@ function Dashboard() {
                                         : " Pending"
                                 }
                             </p>
+                            {
+                                !task.isCompleted && (
+
+                                    <button
+                                        onClick={() => markComplete(task.id)}
+                                        style={styles.completeButton}
+                                    >
+                                        Mark Complete
+                                    </button>
+                                )
+                            }
+                            <button
+                                onClick={() => deleteTask(task.id)}
+                                style={styles.deleteButton}
+                            >
+                                Delete
+                            </button>
 
                         </div>
                     ))
@@ -159,7 +206,6 @@ function Dashboard() {
         </div>
     );
 }
-
 const styles = {
 
     container: {
@@ -204,6 +250,19 @@ const styles = {
         border: "1px solid gray",
         padding: "15px",
         borderRadius: "8px"
+    },
+
+    completeButton: {
+    padding: "8px",
+    cursor: "pointer",
+    marginTop: "10px"
+    },
+
+    deleteButton: {
+    padding: "8px",
+    cursor: "pointer",
+    marginTop: "10px",
+    marginLeft: "10px"
     }
 };
 
