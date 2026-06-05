@@ -49,7 +49,7 @@ namespace TaskFlow.BLL.Services
 
             if (user == null)
             {
-                return "Invalid email or password";
+                throw new UnauthorizedAccessException("Invalid email or password");
             }
 
             bool isPasswordValid =
@@ -60,7 +60,7 @@ namespace TaskFlow.BLL.Services
 
             if (!isPasswordValid)
             {
-                return "Invalid email or password";
+                throw new UnauthorizedAccessException("Invalid email or password");
             }
 
             return _jwtHelper.GenerateToken(user);

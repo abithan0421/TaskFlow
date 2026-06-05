@@ -92,5 +92,28 @@ namespace TaskFlow.BLL.Services
                 Console.WriteLine("Some error occurred: ", ex.Message);
             }
         }
+
+        public async Task UpdateTaskAsync(int taskId, CreateTaskDto updateTaskDto, int userId)
+        {
+            var task = await _taskRepository.GetTaskByIdAsync(taskId);
+            try
+            {
+                if (task == null)
+                {
+                    throw new Exception("Task not found");
+                }
+                if (task.UserId != userId)
+                {
+                    throw new Exception("Unauthorized");
+                }
+                task.Title = updateTaskDto.Title;
+                task.Description = updateTaskDto.Description;
+                await _taskRepository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Some error occurred: ", ex.Message);
+            }
+        }
     }
 }

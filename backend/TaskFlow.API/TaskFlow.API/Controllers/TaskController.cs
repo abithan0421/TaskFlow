@@ -50,10 +50,19 @@ namespace TaskFlow.API.Controllers
             await _taskService.RemoveTaskAsync(id, userId);
             return Ok("Task removed successfully");
         }
-        private int GetUserId()
+
+        [HttpPut("{id}/update")]
+        public async Task<IActionResult> UpdateTask(int id, CreateTaskDto request)
         {
-            var UserIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            return int.Parse(UserIdClaim!.Value);
+            var userId = GetUserId();
+            await _taskService.UpdateTaskAsync(id, request, userId);
+            return Ok("Task updated successfully");
         }
+        
+        private int GetUserId()
+            {
+                var UserIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                return int.Parse(UserIdClaim!.Value);
+            }
        }
     }

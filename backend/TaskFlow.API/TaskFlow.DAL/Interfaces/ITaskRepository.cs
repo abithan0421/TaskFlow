@@ -12,6 +12,7 @@ namespace TaskFlow.DAL.Interfaces
         Task AddTaskAsync(TaskItem task);
         Task<List<TaskItem>> GetUserByIdTaskItemAsync(int id);
         Task<TaskItem?> GetTaskByIdAsync(int id);
+        Task UpdateTaskAsync(TaskItem task);
         Task DeleteTaskAsync(TaskItem task);
         Task SaveChangesAsync();
 

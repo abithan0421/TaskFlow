@@ -33,6 +33,10 @@ namespace TaskFlow.DAL.Repositories
             return await _dbcontext.TaskItems.FirstOrDefaultAsync(x=>x.Id == id);
         }
 
+        async Task ITaskRepository.UpdateTaskAsync(TaskItem task)
+        {
+            _dbcontext.TaskItems.Update(task);
+        }
         async Task ITaskRepository.DeleteTaskAsync(TaskItem task)
         {
             _dbcontext.TaskItems.Remove(task);

@@ -36,12 +36,9 @@ function Login() {
                 response.data
             );
 
-            alert("Login successful");
-
             navigate("/dashboard");
 
         } catch (error) {
-
             console.log(error);
 
             alert("Invalid credentials");
