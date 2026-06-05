@@ -28,6 +28,19 @@ namespace TaskFlow.DAL.Repositories
             return await _dbcontext.TaskItems.Where(x => x.UserId == id).ToListAsync();
         }
 
+        async Task<TaskItem> ITaskRepository.GetTaskByIdAsync(int id)
+        {
+            return await _dbcontext.TaskItems.FirstOrDefaultAsync(x=>x.Id == id);
+        }
+
+        async Task ITaskRepository.UpdateTaskAsync(TaskItem task)
+        {
+            _dbcontext.TaskItems.Update(task);
+        }
+        async Task ITaskRepository.DeleteTaskAsync(TaskItem task)
+        {
+            _dbcontext.TaskItems.Remove(task);
+        }
         async Task ITaskRepository.SaveChangesAsync()
         {
             await _dbcontext.SaveChangesAsync();

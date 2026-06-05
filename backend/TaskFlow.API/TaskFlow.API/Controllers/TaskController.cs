@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskFlow.BLL.Interfaces;
 using TaskFlow.BLL.DTOs;
-using Microsoft.Identity.Client;
 using System.Security.Claims;
 
 namespace TaskFlow.API.Controllers
@@ -34,12 +33,36 @@ namespace TaskFlow.API.Controllers
             return Ok(tasks);
         }
 
-        private int GetUserId()
+        [HttpPut("{id}/complete")]
+        public async Task<IActionResult> MarkComplete(int id)
         {
-            var UserIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            return int.Parse(UserIdClaim!.Value);
+            var userId = GetUserId();
+
+            await _taskService.MarkCompleteAsync(id, userId);
+
+            return Ok("Task marked as complete");
         }
 
+        [HttpDelete("{id}/remove")]
+        public async Task<IActionResult> RemoveTask(int id)
+        {
+            var userId = GetUserId();
+            await _taskService.RemoveTaskAsync(id, userId);
+            return Ok("Task removed successfully");
+        }
 
-    }
+        [HttpPut("{id}/update")]
+        public async Task<IActionResult> UpdateTask(int id, CreateTaskDto request)
+        {
+            var userId = GetUserId();
+            await _taskService.UpdateTaskAsync(id, request, userId);
+            return Ok("Task updated successfully");
+        }
+        
+        private int GetUserId()
+            {
+                var UserIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                return int.Parse(UserIdClaim!.Value);
+            }
+       }
     }

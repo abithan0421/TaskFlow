@@ -14,6 +14,7 @@ function Dashboard() {
         description: ""
     });
 
+    const [editingTask, setEditingTask] = useState(null);
     useEffect(() => {
 
         fetchTasks();
@@ -54,8 +55,6 @@ function Dashboard() {
 
             await api.post("/task", formData);
 
-            alert("Task created");
-
             setFormData({
                 title: "",
                 description: ""
@@ -76,6 +75,51 @@ function Dashboard() {
         localStorage.removeItem("token");
 
         navigate("/");
+    };
+
+    const markComplete = async (id) => {
+
+    try {
+
+        await api.put(`/task/${id}/complete`);
+
+        fetchTasks();
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Failed to update task");
+    }
+    };
+
+    const updateTask = async (id, data) => {
+
+    try {
+
+        await api.put(`/Task/${id}/update`, data);
+
+        fetchTasks();
+
+    } catch (error) {
+
+    console.log(error);
+
+    alert("Failed to update task");
+}
+    };
+
+    const deleteTask = async (id) => {
+        try{
+            await api.delete(`/task/${id}/remove`);
+            fetchTasks();
+
+        } catch (error) {
+            
+            console.log(error);
+
+            alert("Failed to delete task");
+    }
     };
 
     return (
@@ -137,7 +181,7 @@ function Dashboard() {
                             style={styles.taskCard}
                         >
 
-                            <h3>{task.title}</h3>
+                            <h3>{task.task}</h3>
 
                             <p>{task.description}</p>
 
@@ -149,13 +193,104 @@ function Dashboard() {
                                         : " Pending"
                                 }
                             </p>
+                            {
+                                !task.isCompleted && (
+
+                                    <button
+                                        onClick={() => markComplete(task.id)}
+                                        style={styles.completeButton}
+                                    >
+                                        Mark Complete
+                                    </button>
+                                )
+                            }
+                            {
+                                !task.isCompleted && (
+                                    <button onClick={() => setEditingTask(task)}
+                                            style={styles.editButton}>
+                                        Edit
+                                    </button>
+                                )
+                            }
+                            <button
+                                onClick={() => deleteTask(task.id)}
+                                style={styles.deleteButton}
+                            >
+                                Delete
+                            </button>
 
                         </div>
                     ))
                 }
 
             </div>
+            {
+    editingTask && (
 
+        <div style={styles.modalOverlay}>
+
+            <div style={styles.modal}>
+
+                <h2>Edit Task</h2>
+
+                <input
+                    type="text"
+                    value={editingTask.task}
+                    onChange={(e) =>
+                        setEditingTask({
+                            ...editingTask,
+                            task: e.target.value
+                        })
+                    }
+                    style={styles.input}
+                />
+
+                <textarea
+                    value={editingTask.description}
+                    onChange={(e) =>
+                        setEditingTask({
+                            ...editingTask,
+                            description: e.target.value
+                        })
+                    }
+                    style={styles.textArea}
+                />
+
+                <div>
+
+                    <button
+                        onClick={async () => {
+
+                            await updateTask(
+                                editingTask.id,
+                                {
+                                    title: editingTask.task,
+                                    description:
+                                        editingTask.description
+                                }
+                            );
+
+                            setEditingTask(null);
+                        }}
+                        style={styles.button}
+                    >
+                        Save
+                    </button>
+
+                    <button
+                        onClick={() =>
+                            setEditingTask(null)
+                        }
+                        style={styles.cancelButton}
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    )
+}
         </div>
     );
 }
@@ -204,7 +339,60 @@ const styles = {
         border: "1px solid gray",
         padding: "15px",
         borderRadius: "8px"
+    },
+
+    completeButton: {
+    padding: "8px",
+    cursor: "pointer",
+    marginTop: "10px"
+    },
+
+    deleteButton: {
+    padding: "8px",
+    cursor: "pointer",
+    marginTop: "10px",
+    marginLeft: "10px"
+    },
+
+    editButton: {
+    padding: "8px",
+    cursor: "pointer",
+    marginTop: "10px",
+    marginLeft: "10px"
+    },
+
+    modalOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+    },
+
+    modal: {
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        width: "400px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "15px"
+    },
+
+    textArea: {
+        padding: "10px",
+        minHeight: "100px"
+    },
+
+    cancelButton: {
+        padding: "10px",
+        marginLeft: "10px",
+        cursor: "pointer"
     }
-};
+    };
 
 export default Dashboard;
