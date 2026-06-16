@@ -96,7 +96,8 @@ const styles = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh"
+        height: "100vh",
+        color: "#124db3"
     },
 
     form: {
@@ -107,12 +108,17 @@ const styles = {
     },
 
     input: {
-        padding: "10px"
+        padding: "10px",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     button: {
         padding: "10px",
-        cursor: "pointer"
+        cursor: "pointer",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     }
 };
 

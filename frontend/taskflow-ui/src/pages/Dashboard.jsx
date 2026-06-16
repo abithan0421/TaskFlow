@@ -15,6 +15,7 @@ function Dashboard() {
     });
 
     const [editingTask, setEditingTask] = useState(null);
+    const [showCreateModal, setShowCreateModal] = useState(false);
     useEffect(() => {
 
         fetchTasks();
@@ -79,47 +80,47 @@ function Dashboard() {
 
     const markComplete = async (id) => {
 
-    try {
+        try {
 
-        await api.put(`/task/${id}/complete`);
+            await api.put(`/task/${id}/complete`);
 
-        fetchTasks();
+            fetchTasks();
 
-    } catch (error) {
+        } catch (error) {
 
-        console.log(error);
+            console.log(error);
 
-        alert("Failed to update task");
-    }
+            alert("Failed to update task");
+        }
     };
 
     const updateTask = async (id, data) => {
 
-    try {
+        try {
 
-        await api.put(`/Task/${id}/update`, data);
+            await api.put(`/Task/${id}/update`, data);
 
-        fetchTasks();
+            fetchTasks();
 
-    } catch (error) {
+        } catch (error) {
 
-    console.log(error);
+            console.log(error);
 
-    alert("Failed to update task");
-}
+            alert("Failed to update task");
+        }
     };
 
     const deleteTask = async (id) => {
-        try{
+        try {
             await api.delete(`/task/${id}/remove`);
             fetchTasks();
 
         } catch (error) {
-            
+
             console.log(error);
 
             alert("Failed to delete task");
-    }
+        }
     };
 
     return (
@@ -130,47 +131,25 @@ function Dashboard() {
 
                 <h2>Task Dashboard</h2>
 
-                <button
-                    onClick={logout}
-                    style={styles.logoutButton}
-                >
-                    Logout
-                </button>
+                <div style={styles.headerButtons}>
+
+                    <button
+                        onClick={() => setShowCreateModal(true)}
+                        style={styles.createButton}
+                    >
+                        Create Task
+                    </button>
+
+                    <button
+                        onClick={logout}
+                        style={styles.logoutButton}
+                    >
+                        Logout
+                    </button>
+
+                </div>
 
             </div>
-
-            <form
-                onSubmit={handleSubmit}
-                style={styles.form}
-            >
-
-                <input
-                    type="text"
-                    name="title"
-                    placeholder="Task title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    style={styles.input}
-                />
-
-                <input
-                    type="text"
-                    name="description"
-                    placeholder="Task description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    style={styles.input}
-                />
-
-                <button
-                    type="submit"
-                    style={styles.button}
-                >
-                    Add Task
-                </button>
-
-            </form>
-
             <div style={styles.taskContainer}>
 
                 {
@@ -207,7 +186,7 @@ function Dashboard() {
                             {
                                 !task.isCompleted && (
                                     <button onClick={() => setEditingTask(task)}
-                                            style={styles.editButton}>
+                                        style={styles.editButton}>
                                         Edit
                                     </button>
                                 )
@@ -225,86 +204,158 @@ function Dashboard() {
 
             </div>
             {
-    editingTask && (
+                editingTask && (
 
-        <div style={styles.modalOverlay}>
+                    <div style={styles.modalOverlay}>
 
-            <div style={styles.modal}>
+                        <div style={styles.modal}>
 
-                <h2>Edit Task</h2>
+                            <h2>Edit Task</h2>
 
-                <input
-                    type="text"
-                    value={editingTask.task}
-                    onChange={(e) =>
-                        setEditingTask({
-                            ...editingTask,
-                            task: e.target.value
-                        })
-                    }
-                    style={styles.input}
-                />
-
-                <textarea
-                    value={editingTask.description}
-                    onChange={(e) =>
-                        setEditingTask({
-                            ...editingTask,
-                            description: e.target.value
-                        })
-                    }
-                    style={styles.textArea}
-                />
-
-                <div>
-
-                    <button
-                        onClick={async () => {
-
-                            await updateTask(
-                                editingTask.id,
-                                {
-                                    title: editingTask.task,
-                                    description:
-                                        editingTask.description
+                            <input
+                                type="text"
+                                value={editingTask.task}
+                                onChange={(e) =>
+                                    setEditingTask({
+                                        ...editingTask,
+                                        task: e.target.value
+                                    })
                                 }
-                            );
+                                style={styles.input}
+                            />
 
-                            setEditingTask(null);
-                        }}
-                        style={styles.button}
-                    >
-                        Save
-                    </button>
+                            <textarea
+                                value={editingTask.description}
+                                onChange={(e) =>
+                                    setEditingTask({
+                                        ...editingTask,
+                                        description: e.target.value
+                                    })
+                                }
+                                style={styles.textArea}
+                            />
 
-                    <button
-                        onClick={() =>
-                            setEditingTask(null)
-                        }
-                        style={styles.cancelButton}
-                    >
-                        Cancel
-                    </button>
+                            <div>
 
-                </div>
-            </div>
-        </div>
-    )
-}
+                                <button
+                                    onClick={async () => {
+
+                                        await updateTask(
+                                            editingTask.id,
+                                            {
+                                                title: editingTask.task,
+                                                description:
+                                                    editingTask.description
+                                            }
+                                        );
+
+                                        setEditingTask(null);
+                                    }}
+                                    style={styles.button}
+                                >
+                                    Save
+                                </button>
+
+                                <button
+                                    onClick={() =>
+                                        setEditingTask(null)
+                                    }
+                                    style={styles.cancelButton}
+                                >
+                                    Cancel
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+            
+                            {
+                                showCreateModal && (
+
+                                    <div style={styles.modalOverlay}>
+
+                                        <div style={styles.modal}>
+
+                                            <h2>Create Task</h2>
+
+                                            <input
+                                                type="text"
+                                                name="title"
+                                                placeholder="Task title"
+                                                value={formData.title}
+                                                onChange={handleChange}
+                                                style={styles.input}
+                                            />
+
+                                            <textarea
+                                                name="description"
+                                                placeholder="Task description"
+                                                value={formData.description}
+                                                onChange={handleChange}
+                                                style={styles.textArea}
+                                            />
+
+                                            <div>
+
+                                                <button
+                                                    onClick={async () => {
+
+                                                        await handleSubmit({
+                                                            preventDefault: () => { }
+                                                        });
+
+                                                        setShowCreateModal(false);
+                                                    }}
+                                                    style={styles.button}
+                                                >
+                                                    Create
+                                                </button>
+
+                                                <button
+                                                    onClick={() => {
+
+                                                        setShowCreateModal(false);
+
+                                                        setFormData({
+                                                            title: "",
+                                                            description: ""
+                                                        });
+                                                    }}
+                                                    style={styles.cancelButton}
+                                                >
+                                                    Cancel
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                )
+                            }
         </div>
     );
 }
 
 const styles = {
+    headerButtons: {
+        display: "flex",
+        gap: "10px"
+    },
 
     container: {
-        padding: "20px"
+        padding: "20px",
+        backgroundColor: "#FAFAFA",
+        minHeight: "100vh"
     },
 
     header: {
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        color: "#124db3"
     },
 
     form: {
@@ -314,85 +365,121 @@ const styles = {
     },
 
     input: {
-        padding: "10px",
-        width: "200px"
+        padding: "12px",
+        width: "100%",
+        boxSizing: "border-box",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     button: {
         padding: "10px",
-        cursor: "pointer"
+        cursor: "pointer",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
+    },
+
+    createButton: {
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     logoutButton: {
         padding: "10px",
-        cursor: "pointer"
+        cursor: "pointer",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     taskContainer: {
         marginTop: "30px",
         display: "flex",
         flexDirection: "column",
-        gap: "15px"
+        gap: "15px", color: "#1565C0"
     },
 
     taskCard: {
-        border: "1px solid gray",
-        padding: "15px",
-        borderRadius: "8px"
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #EEEEEE",
+        padding: "20px",
+        borderRadius: "12px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
     },
 
     completeButton: {
-    padding: "8px",
-    cursor: "pointer",
-    marginTop: "10px"
+        padding: "8px",
+        cursor: "pointer",
+        marginTop: "10px",
+        backgroundColor: "#E8F5E9",
+        color: "#2E7D32",
+        border: "1px solid #C8E6C9"
     },
 
     deleteButton: {
-    padding: "8px",
-    cursor: "pointer",
-    marginTop: "10px",
-    marginLeft: "10px"
+        padding: "8px",
+        cursor: "pointer",
+        marginTop: "10px",
+        marginLeft: "10px",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     editButton: {
-    padding: "8px",
-    cursor: "pointer",
-    marginTop: "10px",
-    marginLeft: "10px"
+        padding: "8px",
+        cursor: "pointer",
+        marginTop: "10px",
+        marginLeft: "10px",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     modalOverlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0,0,0,0.5)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     },
 
     modal: {
         backgroundColor: "white",
-        padding: "20px",
-        borderRadius: "10px",
-        width: "400px",
+        padding: "25px",
+        borderRadius: "12px",
+        width: "90%",
+        maxWidth: "450px",
         display: "flex",
         flexDirection: "column",
-        gap: "15px"
+        gap: "15px",
+        boxSizing: "border-box",
+        color: "#1565C0",
+        border: "1px solid #BBDEFB"
     },
 
     textArea: {
         padding: "10px",
-        minHeight: "100px"
+        minHeight: "100px",
+        boxSizing: "border-box",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     cancelButton: {
         padding: "10px",
         marginLeft: "10px",
-        cursor: "pointer"
+        cursor: "pointer",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     }
-    };
+};
 
 export default Dashboard;
