@@ -100,16 +100,23 @@ const styles = {
         display: "flex",
         flexDirection: "column",
         width: "300px",
-        gap: "10px"
+        gap: "10px",
+        color: "#124db3"
     },
 
     input: {
-        padding: "10px"
+        padding: "10px",
+        boxSizing: "border-box",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     button: {
         padding: "10px",
-        cursor: "pointer"
+        cursor: "pointer",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     }
 };
 
