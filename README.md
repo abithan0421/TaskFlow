@@ -64,7 +64,7 @@ frontend/
 
 
 ### To Run Locally
-## Backend
+### Backend
 
 cd backend/TaskFlow.API
 dotnet restore
@@ -77,7 +77,7 @@ cd frontend
 npm install
 npm run dev
 
-###Environment Variables
+### Environment Variables
 ConnectionStrings__DefaultConnection=
 Jwt__Key=
 Jwt__Issuer=
