@@ -348,7 +348,8 @@ const styles = {
     container: {
         padding: "20px",
         backgroundColor: "#FAFAFA",
-        minHeight: "100vh"
+        minHeight: "100vh",
+        boxSizing: "border-box"
     },
 
     header: {
