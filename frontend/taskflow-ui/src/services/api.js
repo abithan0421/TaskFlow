@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://localhost:7076/api"
+    baseURL: "https://taskflow-api-35f2.onrender.com/api"
 });
 
 api.interceptors.request.use(
