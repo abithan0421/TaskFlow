@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import api from "../services/api";
@@ -11,6 +11,11 @@ function Login() {
         email: "",
         password: ""
     });
+
+    useEffect(() => {
+    if (localStorage.getItem("token")) {
+        navigate("/dashboard", { replace: true });
+    }}, []);
 
     const handleChange = (e) => {
 
