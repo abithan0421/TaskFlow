@@ -128,7 +128,7 @@ function Dashboard() {
         <div style={styles.container}>
             <div style={styles.header}>
 
-                <h2 style={styles.heading}>Task Dashboard</h2>
+                <h2 style={styles.header}>Task Flow</h2>
 
                 <div style={styles.headerButtons}>
                     <button
@@ -379,14 +379,12 @@ const styles = {
         backgroundColor: "#dae4f7",
         color: "#124db3",
         border: "1px solid #a4c5ff",
-        fontSize: "16px"
     },
 
     createButton: {
         backgroundColor: "#dae4f7",
         color: "#124db3",
-        border: "1px solid #a4c5ff",
-        fontSize: "16px"
+        border: "1px solid #a4c5ff"
     },
 
     logoutButton: {
@@ -394,8 +392,7 @@ const styles = {
         cursor: "pointer",
         backgroundColor: "#dae4f7",
         color: "#124db3",
-        border: "1px solid #a4c5ff",
-        fontSize: "16px"
+        border: "1px solid #a4c5ff"
     },
 
     taskContainer: {
