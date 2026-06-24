@@ -95,10 +95,10 @@ function Login() {
 const styles = {
 
     container: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh"
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh"
     },
 
     form: {
