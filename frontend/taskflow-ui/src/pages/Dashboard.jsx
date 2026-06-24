@@ -126,16 +126,14 @@ function Dashboard() {
     return (
 
         <div style={styles.container}>
-
             <div style={styles.header}>
 
-                <h2>Task Dashboard</h2>
+                <h2 style={styles.heading}>Task Dashboard</h2>
 
                 <div style={styles.headerButtons}>
-
                     <button
                         onClick={() => setShowCreateModal(true)}
-                        style={styles.createButton}
+                        style={styles.button}
                     >
                         Create Task
                     </button>
@@ -146,7 +144,6 @@ function Dashboard() {
                     >
                         Logout
                     </button>
-
                 </div>
 
             </div>
@@ -270,71 +267,71 @@ function Dashboard() {
                     </div>
                 )
             }
-            
-                            {
-                                showCreateModal && (
 
-                                    <div style={styles.modalOverlay}>
+            {
+                showCreateModal && (
 
-                                        <div style={styles.modal}>
+                    <div style={styles.modalOverlay}>
 
-                                            <h2>Create Task</h2>
+                        <div style={styles.modal}>
 
-                                            <input
-                                                type="text"
-                                                name="title"
-                                                placeholder="Task title"
-                                                value={formData.title}
-                                                onChange={handleChange}
-                                                style={styles.input}
-                                            />
+                            <h2>Create Task</h2>
 
-                                            <textarea
-                                                name="description"
-                                                placeholder="Task description"
-                                                value={formData.description}
-                                                onChange={handleChange}
-                                                style={styles.textArea}
-                                            />
+                            <input
+                                type="text"
+                                name="title"
+                                placeholder="Task title"
+                                value={formData.title}
+                                onChange={handleChange}
+                                style={styles.input}
+                            />
 
-                                            <div>
+                            <textarea
+                                name="description"
+                                placeholder="Task description"
+                                value={formData.description}
+                                onChange={handleChange}
+                                style={styles.textArea}
+                            />
 
-                                                <button
-                                                    onClick={async () => {
+                            <div>
 
-                                                        await handleSubmit({
-                                                            preventDefault: () => { }
-                                                        });
+                                <button
+                                    onClick={async () => {
 
-                                                        setShowCreateModal(false);
-                                                    }}
-                                                    style={styles.button}
-                                                >
-                                                    Create
-                                                </button>
+                                        await handleSubmit({
+                                            preventDefault: () => { }
+                                        });
 
-                                                <button
-                                                    onClick={() => {
+                                        setShowCreateModal(false);
+                                    }}
+                                    style={styles.button}
+                                >
+                                    Create
+                                </button>
 
-                                                        setShowCreateModal(false);
+                                <button
+                                    onClick={() => {
 
-                                                        setFormData({
-                                                            title: "",
-                                                            description: ""
-                                                        });
-                                                    }}
-                                                    style={styles.cancelButton}
-                                                >
-                                                    Cancel
-                                                </button>
+                                        setShowCreateModal(false);
 
-                                            </div>
+                                        setFormData({
+                                            title: "",
+                                            description: ""
+                                        });
+                                    }}
+                                    style={styles.cancelButton}
+                                >
+                                    Cancel
+                                </button>
 
-                                        </div>
+                            </div>
 
-                                    </div>
-                                )
-                            }
+                        </div>
+
+                    </div>
+                )
+            }
         </div>
     );
 }
@@ -348,20 +345,24 @@ const styles = {
     container: {
         padding: "20px",
         backgroundColor: "#FAFAFA",
-        minHeight: "100vh"
+        minHeight: "100dvh",
+        boxSizing: "border-box"
     },
 
     header: {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        color: "#124db3"
+        color: "#124db3",
+        flexWrap: "wrap",
+        gap: "10px"
     },
 
     form: {
         display: "flex",
         gap: "10px",
-        marginTop: "20px"
+        marginTop: "20px",
+        flexWrap: "wrap"
     },
 
     input: {
@@ -377,13 +378,15 @@ const styles = {
         cursor: "pointer",
         backgroundColor: "#dae4f7",
         color: "#124db3",
-        border: "1px solid #a4c5ff"
+        border: "1px solid #a4c5ff",
+        fontSize: "16px"
     },
 
     createButton: {
         backgroundColor: "#dae4f7",
         color: "#124db3",
-        border: "1px solid #a4c5ff"
+        border: "1px solid #a4c5ff",
+        fontSize: "16px"
     },
 
     logoutButton: {
@@ -391,7 +394,8 @@ const styles = {
         cursor: "pointer",
         backgroundColor: "#dae4f7",
         color: "#124db3",
-        border: "1px solid #a4c5ff"
+        border: "1px solid #a4c5ff",
+        fontSize: "16px"
     },
 
     taskContainer: {
