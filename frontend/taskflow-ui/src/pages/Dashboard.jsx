@@ -188,12 +188,24 @@ function Dashboard() {
                                     </button>
                                 )
                             }
-                            <button
-                                onClick={() => deleteTask(task.id)}
-                                style={styles.deleteButton}
-                            >
-                                Delete
-                            </button>
+                            {
+                                !task.isCompleted && (
+                                    <button
+                                        onClick={() => deleteTask(task.id)}
+                                        style={styles.deleteButton}
+                                    >
+                                        Delete
+                                    </button>)
+                            }
+                            {
+                                task.isCompleted && (
+                                    <button
+                                        onClick={() => deleteTask(task.id)}
+                                        style={styles.completeDeleteButton}
+                                    >
+                                        Delete
+                                    </button>)
+                            }
 
                         </div>
                     ))
@@ -355,7 +367,8 @@ const styles = {
         alignItems: "center",
         color: "#124db3",
         flexWrap: "wrap",
-        gap: "10px"
+        gap: "10px",
+        fontSize: "20px",
     },
 
     form: {
@@ -381,14 +394,8 @@ const styles = {
         border: "1px solid #a4c5ff",
     },
 
-    createButton: {
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff"
-    },
-
     logoutButton: {
-        padding: "10px",
+        padding: "5px",
         cursor: "pointer",
         backgroundColor: "#dae4f7",
         color: "#124db3",
@@ -417,6 +424,15 @@ const styles = {
         backgroundColor: "#E8F5E9",
         color: "#2E7D32",
         border: "1px solid #C8E6C9"
+    },
+
+    completeDeleteButton: {
+        padding: "8px",
+        cursor: "pointer",
+        marginTop: "10px",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     deleteButton: {
