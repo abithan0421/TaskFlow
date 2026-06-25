@@ -4,7 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 
 function Register() {
-
+    
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -24,12 +25,10 @@ function Register() {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-
+        setLoading(true);
         try {
 
             await api.post("/auth/register", formData);
-
-            alert("Registration successful");
 
             navigate("/");
 
@@ -39,8 +38,19 @@ function Register() {
 
             alert("Registration failed");
         }
+        finally {
+            setLoading(false);
+        }
     };
 
+    if (loading) {
+        return (
+            <div style={styles.loaderContainer}>
+                <div style={styles.spinner}></div>
+                <p style={styles.text}>Creating your account...</p>
+            </div>
+        );
+    }
     return (
         <div style={styles.container}>
 
@@ -119,6 +129,27 @@ const styles = {
         backgroundColor: "#dae4f7",
         color: "#124db3",
         border: "1px solid #a4c5ff"
+    },
+
+    loaderContainer: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        gap: "15px"
+    },
+
+    spinner: {
+        width: "25px",
+        height: "25px",
+        border: "5px solid white",
+        borderTop: "5px solid #124db3",
+        borderRadius: "50%",
+        animation: "spin 1s linear infinite"
+    },
+    text: {
+        color: "#124db3"
     }
 };
 

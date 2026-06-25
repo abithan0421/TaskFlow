@@ -42,7 +42,7 @@ namespace TaskFlow.BLL.Helpers
                                 issuer: _configuration["Jwt:Issuer"],
                                 audience: _configuration["Jwt:Audience"],
                                 claims: claims,
-                                expires: DateTime.Now.AddHours(2),
+                                expires: DateTime.UtcNow.AddDays(30),
                                 signingCredentials: creds
                                 );
 

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 function Dashboard() {
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ function Dashboard() {
     }, []);
 
     const fetchTasks = async () => {
-
+        setLoading(true);
         try {
 
             const response = await api.get("/task");
@@ -37,6 +38,10 @@ function Dashboard() {
             console.log(error.response);
 
             alert("Failed to fetch tasks");
+        }
+        finally {
+
+            setLoading(false);
         }
     };
 
@@ -123,6 +128,15 @@ function Dashboard() {
         }
     };
 
+    if (loading) {
+        return (
+            <div style={styles.loaderContainer}>
+                <div style={styles.spinner}></div>
+                <p style={styles.text}>Loading your tasks...</p>
+            </div>
+        );
+    }
+
     return (
 
         <div style={styles.container}>
@@ -188,12 +202,24 @@ function Dashboard() {
                                     </button>
                                 )
                             }
-                            <button
-                                onClick={() => deleteTask(task.id)}
-                                style={styles.deleteButton}
-                            >
-                                Delete
-                            </button>
+                            {
+                                !task.isCompleted && (
+                                    <button
+                                        onClick={() => deleteTask(task.id)}
+                                        style={styles.deleteButton}
+                                    >
+                                        Delete
+                                    </button>)
+                            }
+                            {
+                                task.isCompleted && (
+                                    <button
+                                        onClick={() => deleteTask(task.id)}
+                                        style={styles.completeDeleteButton}
+                                    >
+                                        Delete
+                                    </button>)
+                            }
 
                         </div>
                     ))
@@ -355,7 +381,8 @@ const styles = {
         alignItems: "center",
         color: "#124db3",
         flexWrap: "wrap",
-        gap: "10px"
+        gap: "10px",
+        fontSize: "20px",
     },
 
     form: {
@@ -381,14 +408,8 @@ const styles = {
         border: "1px solid #a4c5ff",
     },
 
-    createButton: {
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff"
-    },
-
     logoutButton: {
-        padding: "10px",
+        padding: "5px",
         cursor: "pointer",
         backgroundColor: "#dae4f7",
         color: "#124db3",
@@ -417,6 +438,15 @@ const styles = {
         backgroundColor: "#E8F5E9",
         color: "#2E7D32",
         border: "1px solid #C8E6C9"
+    },
+
+    completeDeleteButton: {
+        padding: "8px",
+        cursor: "pointer",
+        marginTop: "10px",
+        backgroundColor: "#dae4f7",
+        color: "#124db3",
+        border: "1px solid #a4c5ff"
     },
 
     deleteButton: {
@@ -480,6 +510,27 @@ const styles = {
         backgroundColor: "#dae4f7",
         color: "#124db3",
         border: "1px solid #a4c5ff"
+    },
+
+    loaderContainer: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        gap: "15px"
+    },
+
+    spinner: {
+        width: "25px",
+        height: "25px",
+        border: "5px solid white",
+        borderTop: "5px solid #124db3",
+        borderRadius: "50%",
+        animation: "spin 1s linear infinite"
+    },
+    text: {
+        color: "#124db3"
     }
 };
 
