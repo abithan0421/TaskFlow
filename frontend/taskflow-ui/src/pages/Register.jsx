@@ -126,9 +126,10 @@ const styles = {
     button: {
         padding: "10px",
         cursor: "pointer",
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff"
+        borderRadius: "4px",
+        backgroundColor: "#124db3",
+        color: "#FAFAFA",
+        border: "1px solid #124db3",
     },
 
     loaderContainer: {
