@@ -142,7 +142,7 @@ function Dashboard() {
         <div style={styles.container}>
             <div style={styles.header}>
 
-                <h2 style={styles.header}>Task Flow</h2>
+                <h2 style={styles.header}>TaskFlow</h2>
 
                 <div style={styles.headerButtons}>
                     <button
@@ -190,7 +190,7 @@ function Dashboard() {
                                         onClick={() => markComplete(task.id)}
                                         style={styles.completeButton}
                                     >
-                                        Mark Complete
+                                        Done
                                     </button>
                                 )
                             }
@@ -233,7 +233,7 @@ function Dashboard() {
 
                         <div style={styles.modal}>
 
-                            <h2>Edit Task</h2>
+                            <h2 style = {styles.header}>Edit Task</h2>
 
                             <input
                                 type="text"
@@ -301,7 +301,7 @@ function Dashboard() {
 
                         <div style={styles.modal}>
 
-                            <h2>Create Task</h2>
+                            <h2 style = {styles.header}>Create Task</h2>
 
                             <input
                                 type="text"
@@ -331,7 +331,7 @@ function Dashboard() {
 
                                         setShowCreateModal(false);
                                     }}
-                                    style={styles.button}
+                                    style={styles.createButton}
                                 >
                                     Create
                                 </button>
@@ -401,19 +401,23 @@ const styles = {
     },
 
     button: {
-        padding: "10px",
         cursor: "pointer",
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff",
+        padding: "6px",
+        width: "85px",
+        borderRadius: "4px",
+        backgroundColor: "#124db3",
+        color: "#FAFAFA",
+        border: "1px solid #124db3",
     },
 
     logoutButton: {
-        padding: "5px",
         cursor: "pointer",
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff"
+        padding: "6px",
+        width: "85px",
+        borderRadius: "4px",
+        backgroundColor: "#124db3",
+        color: "#FAFAFA",
+        border: "1px solid #124db3",
     },
 
     taskContainer: {
@@ -432,41 +436,48 @@ const styles = {
     },
 
     completeButton: {
-        padding: "8px",
         cursor: "pointer",
         marginTop: "10px",
-        backgroundColor: "#E8F5E9",
-        color: "#2E7D32",
-        border: "1px solid #C8E6C9"
+        padding: "6px",
+        width: "85px",
+        borderRadius: "4px",
+        backgroundColor: "#2E7D32",
+        color: "#FAFAFA",
+        border: "1px solid #2E7D32",
     },
 
     completeDeleteButton: {
-        padding: "8px",
         cursor: "pointer",
-        marginTop: "10px",
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff"
+        padding: "6px",
+        width: "85px",
+        borderRadius: "4px",
+        backgroundColor: "#124db3",
+        color: "#FAFAFA",
+        border: "1px solid #124db3",
     },
 
     deleteButton: {
-        padding: "8px",
         cursor: "pointer",
         marginTop: "10px",
         marginLeft: "10px",
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff"
+        padding: "6px",
+        width: "85px",
+        borderRadius: "4px",
+        backgroundColor: "#124db3",
+        color: "#FAFAFA",
+        border: "1px solid #124db3",
     },
 
     editButton: {
-        padding: "8px",
         cursor: "pointer",
         marginTop: "10px",
         marginLeft: "10px",
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff"
+        padding: "6px",
+        width: "85px",
+        borderRadius: "4px",
+        backgroundColor: "#124db3",
+        color: "#FAFAFA",
+        border: "1px solid #124db3",
     },
 
     modalOverlay: {
@@ -504,12 +515,24 @@ const styles = {
     },
 
     cancelButton: {
-        padding: "10px",
+        padding: "6px",
+        width: "75px",
+        borderRadius: "4px",
+        backgroundColor: "#124db3",
+        color: "#FAFAFA",
+        border: "1px solid #124db3",
         marginLeft: "10px",
-        cursor: "pointer",
-        backgroundColor: "#dae4f7",
-        color: "#124db3",
-        border: "1px solid #a4c5ff"
+        cursor: "pointer"
+    },
+
+    createButton:{
+       padding: "6px",
+        width: "75px",
+        borderRadius: "4px",
+        backgroundColor: "#124db3",
+        color: "#FAFAFA",
+        border: "1px solid #124db3",
+        cursor: "pointer" 
     },
 
     loaderContainer: {
