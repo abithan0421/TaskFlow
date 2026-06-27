@@ -71,8 +71,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173",
-                                "https://task-flow-pearl-nu.vercel.app")
+            policy.WithOrigins("https://task-flow-pearl-nu.vercel.app")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
