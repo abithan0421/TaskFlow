@@ -17,9 +17,22 @@ api.interceptors.request.use(
         }
 
         return config;
-    },
+    }
+);
+
+api.interceptors.response.use(
+    (response) => response,
 
     (error) => {
+
+        if (error.response && error.response.status === 401) {
+
+            localStorage.removeItem("token");
+
+            window.location.href = "/";
+
+            return;
+        }
 
         return Promise.reject(error);
     }
