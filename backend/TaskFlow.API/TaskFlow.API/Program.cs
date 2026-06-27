@@ -29,7 +29,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")
+        builder.Configuration.GetConnectionString("TaskFlowDBConnectionString")
     ));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -71,8 +71,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173",
-                                "https://task-flow-pearl-nu.vercel.app")
+            policy.WithOrigins("https://task-flow-pearl-nu.vercel.app")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
