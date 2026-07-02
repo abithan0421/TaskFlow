@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace TaskFlow.BLL.DTOs
 {
-    public class TaskResponseDto
+    public class SubTaskResponseDto
     {
         public int Id { get; set; }
-        public string Task { get; set; }
-        public string Description { get; set; }
+        public string SubTask { get; set; }
+        public string Remark { get; set; }
         public bool IsCompleted { get; set; }
-        public List<SubTaskResponseDto> SubTasks { get; set; } = new();
     }
 }

@@ -38,7 +38,16 @@ namespace TaskFlow.BLL.Services
                 Id = t.Id,
                 Task = t.Title,
                 Description = t.Description,
-                IsCompleted = t.IsCompleted
+                IsCompleted = t.IsCompleted,
+
+                SubTasks = t.SubTasks.Select(s => new SubTaskResponseDto
+                {
+                    Id = s.Id,
+                    SubTask = s.Title,
+                    Remark = s.Remark,
+                    IsCompleted = s.IsCompleted
+                }).ToList()
+
             }).ToList();
         }
 

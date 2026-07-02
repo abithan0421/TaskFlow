@@ -66,6 +66,10 @@ builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
 builder.Services.AddScoped<ITaskService, TaskService>();
 
+builder.Services.AddScoped<ISubTaskRepository, SubTaskRepository>();
+
+builder.Services.AddScoped<ISubTaskService, SubTaskService>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
