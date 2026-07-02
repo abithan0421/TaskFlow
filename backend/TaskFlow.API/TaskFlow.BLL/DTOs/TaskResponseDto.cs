@@ -12,5 +12,6 @@ namespace TaskFlow.BLL.DTOs
         public string Task { get; set; }
         public string Description { get; set; }
         public bool IsCompleted { get; set; }
+        public List<SubTaskResponseDto> SubTasks { get; set; } = new();
     }
 }

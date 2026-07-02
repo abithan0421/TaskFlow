@@ -25,7 +25,8 @@ namespace TaskFlow.DAL.Repositories
 
         async Task<List<TaskItem>> ITaskRepository.GetUserByIdTaskItemAsync(int id)
         {
-            return await _dbcontext.TaskItems.Where(x => x.UserId == id).ToListAsync();
+            //return await _dbcontext.TaskItems.Where(x => x.UserId == id).ToListAsync();
+            return await _dbcontext.TaskItems.Include(x => x.SubTasks).Where(x => x.UserId == id).ToListAsync();
         }
 
         async Task<TaskItem> ITaskRepository.GetTaskByIdAsync(int id)

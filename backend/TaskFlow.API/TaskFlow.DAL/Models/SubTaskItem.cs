@@ -15,5 +15,6 @@ namespace TaskFlow.DAL.Models
         public string Remark { get; set; } = string.Empty;
         public bool IsCompleted { get; set; }
         public int MainTaskId { get; set; }
+        public TaskItem? MainTask { get; set; }
     }
 }

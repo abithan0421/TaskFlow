@@ -23,6 +23,15 @@ namespace TaskFlow.DAL.Data
         //    .Build()
         //    .GetConnectionString("TaskFlowDBConnectionString"));
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<SubTaskItem>()
+                .HasOne(s => s.MainTask)
+                .WithMany(t => t.SubTasks)
+                .HasForeignKey(s => s.MainTaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }
