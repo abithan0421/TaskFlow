@@ -10,7 +10,7 @@ namespace TaskFlow.DAL.Models
         public string Description { get; set; } = string.Empty;
         public bool IsCompleted { get; set; }
         public int UserId { get; set; }
-        public User? User { get; set; }
+        public User User { get; set; }
         public ICollection<SubTaskItem> SubTasks { get; set; } = new List<SubTaskItem>();
     }
 }
