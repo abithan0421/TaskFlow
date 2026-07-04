@@ -139,6 +139,27 @@ function Dashboard() {
         }
     };
 
+    const toggleSubTask = async (taskId, subTaskId) => {
+
+        try {
+
+            await api.put(
+                `/SubTask/${taskId}/${subTaskId}/complete`
+            );
+
+            fetchTasks();
+
+        }
+        catch (error) {
+
+            console.log(error);
+
+            alert("Failed to update subtask");
+
+        }
+
+    };
+
     const deleteSubTask = async (taskId, subTaskId) => {
         // if (!window.confirm("Are you sure you want to delete this subtask?")) return;
 
@@ -173,9 +194,8 @@ function Dashboard() {
                     <TaskCard
                         key={task.id}
                         task={task}
-                        onMarkComplete={(taskId, subTaskId) =>
-                            subTaskId ? completeSubTask(taskId, subTaskId) : markComplete(taskId)
-                        }
+                        onMarkComplete={markComplete}
+                        onToggleSubTask={toggleSubTask}
                         onEdit={setEditingTask}
                         onDelete={deleteTask}
                     />

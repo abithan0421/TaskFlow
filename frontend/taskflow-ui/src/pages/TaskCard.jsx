@@ -1,5 +1,5 @@
 // TaskCard.jsx
-const TaskCard = ({ task, onMarkComplete, onEdit, onDelete }) => {
+const TaskCard = ({ task, onMarkComplete, onToggleSubTask, onEdit, onDelete }) => {
     const styles = {
         taskCard: {
             backgroundColor: "#FFFFFF",
@@ -72,7 +72,13 @@ const TaskCard = ({ task, onMarkComplete, onEdit, onDelete }) => {
                                 <input
                                     type="checkbox"
                                     checked={subTask.isCompleted}
-                                    onChange={() => onMarkComplete(task.id, subTask.id)}
+                                    onChange={() =>
+                                        onToggleSubTask(
+                                            task.id,
+                                            subTask.id
+                                        )
+                                    }
+
                                 />
                                 <div>
                                     <strong>{subTask.subTask}</strong>

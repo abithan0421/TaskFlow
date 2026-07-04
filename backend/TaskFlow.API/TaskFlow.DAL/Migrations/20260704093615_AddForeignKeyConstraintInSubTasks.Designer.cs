@@ -11,8 +11,8 @@ using TaskFlow.DAL.Data;
 namespace TaskFlow.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260704091737_AddForeignKeyConstraintInSubTask")]
-    partial class AddForeignKeyConstraintInSubTask
+    [Migration("20260704093615_AddForeignKeyConstraintInSubTasks")]
+    partial class AddForeignKeyConstraintInSubTasks
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

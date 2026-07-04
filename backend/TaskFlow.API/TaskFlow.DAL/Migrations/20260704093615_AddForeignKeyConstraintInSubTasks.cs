@@ -5,7 +5,7 @@
 namespace TaskFlow.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddForeignKeyConstraintInSubTask : Migration
+    public partial class AddForeignKeyConstraintInSubTasks : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

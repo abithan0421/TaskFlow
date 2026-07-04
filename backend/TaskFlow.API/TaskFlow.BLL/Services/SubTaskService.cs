@@ -78,7 +78,7 @@ namespace TaskFlow.BLL.Services
                     return;
                 }
 
-                subTask.IsCompleted = true;
+                subTask.IsCompleted = !subTask.IsCompleted;
 
                 await _subTaskRepository.SaveChangesAsync();
 
