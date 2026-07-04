@@ -11,7 +11,7 @@ using TaskFlow.DAL.Data;
 namespace TaskFlow.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260704080640_RemoveOrphanSubTasks")]
+    [Migration("20260704084101_RemoveOrphanSubTasks")]
     partial class RemoveOrphanSubTasks
     {
         /// <inheritdoc />
