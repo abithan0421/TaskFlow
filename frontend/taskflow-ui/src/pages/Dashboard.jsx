@@ -88,6 +88,25 @@ function Dashboard() {
         }
     };
 
+    // const createSubTask = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         await api.post(`/SubTask/${selectedTaskId}`, {
+    //             title: subTaskData.subTask,
+    //             remark: subTaskData.remark
+    //         });
+
+    //         setShowSubTaskModal(false);
+    //         setSubTaskData({ subTask: "", remark: "" });
+    //         const response = await api.get("/task");
+    //         setTasks(response.data);
+    //         const currentTask = response.data.find(x => x.id === selectedTaskId);
+    //         setEditingTask(currentTask);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
     const createSubTask = async (e) => {
         e.preventDefault();
         try {
@@ -95,15 +114,26 @@ function Dashboard() {
                 title: subTaskData.subTask,
                 remark: subTaskData.remark
             });
-
             setShowSubTaskModal(false);
-            setSubTaskData({ subTask: "", remark: "" });
+            setSubTaskData({
+                subTask: "",
+                remark: ""
+            });
             const response = await api.get("/task");
             setTasks(response.data);
-            const currentTask = response.data.find(x => x.id === selectedTaskId);
-            setEditingTask(currentTask);
+            const updatedTask = response.data.find(
+                task => task.id === selectedTaskId
+            );
+            if (updatedTask) {
+
+                setEditingTask(prev => ({
+                    ...prev,
+                    subTasks: updatedTask.subTasks
+                }));
+            }
         } catch (error) {
             console.log(error);
+            alert("Failed to create subtask");
         }
     };
 
